@@ -1,19 +1,5 @@
-# infinite-scroll
+# pokemon-infinite-scroll
 
-## Project setup
-```
-yarn install
-```
+data source: https://pokeapi.co
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+image source: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
