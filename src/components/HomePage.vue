@@ -2,10 +2,10 @@
   <h1 class="title">home page</h1>
   <div class="card-container" ref="el">
     <PokeCard
-      v-for="(pokemon, index) in pokemons"
+      v-for="pokemon in pokemons"
       :key="pokemon.name"
       :pokemon="pokemon"
-      :pokemonIndex="index"
+      :pokemonIndex="pokemon.index"
     />
   </div>
 </template>
@@ -41,18 +41,19 @@
         const request = await axios.get(
           `https://pokeapi.co/api/v2/pokemon?offset=${this.pokemonOffset}&limit=${this.pokemonLimit}`
         );
-        request.data.results.forEach((poke) => {
+        request.data.results.forEach((poke, index) => {
+          poke.index = index + 1 + this.pokemonOffset;
           this.pokemons.push(poke);
         });
         this.loadingData = false;
         this.currentPage += 1;
       },
 
-      reachedBottom() {
+      loadMorePokemon() {
+        if (this.loadingData) {
+          return;
+        }
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-          if (this.loadingData) {
-            return;
-          }
           this.getPokemons();
         }
       },
@@ -60,7 +61,7 @@
 
     mounted() {
       this.getPokemons();
-      window.addEventListener("scroll", this.reachedBottom);
+      window.addEventListener("scroll", this.loadMorePokemon);
     },
   };
 </script>

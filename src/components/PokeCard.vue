@@ -1,8 +1,9 @@
 <template>
-  <div class="pokemon-card">
+  <router-link :to="pokemonDest" class="pokemon-card">
     <img class="pokemon-img" :src="imgUrl" />
+
     <h3>{{ pokemon.name }}</h3>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -12,9 +13,11 @@
 
     computed: {
       imgUrl() {
-        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-          this.pokemonIndex + 1
-        }.png`;
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokemon.index}.png`;
+      },
+
+      pokemonDest() {
+        return `/pokemon/${this.pokemon.index}`;
       },
     },
   };
